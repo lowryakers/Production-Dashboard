@@ -108,10 +108,18 @@ export async function fetchScheduleData() {
     const res = await fetch(`${API_BASE}/api/schedule`);
     if (res.ok) {
       const json = await res.json();
-      return json.data || [];
+      return { data: json.data || [], snapshots: json.snapshots || [] };
     }
   } catch {}
-  return [];
+  return { data: [], snapshots: [] };
+}
+
+export async function fetchSnapshot(id) {
+  try {
+    const res = await fetch(`${API_BASE}/api/schedule/snapshot/${encodeURIComponent(id)}`);
+    if (res.ok) return await res.json();
+  } catch {}
+  return null;
 }
 
 export async function refreshData() {

@@ -10,15 +10,15 @@ import ScheduleTab from './components/ScheduleTab';
 import { BarChart3, TrendingUp, Users, List, CalendarCheck } from 'lucide-react';
 
 const TABS = [
-  { id: 'production', label: 'Production', icon: BarChart3 },
-  { id: 'efficiency', label: 'Efficiency', icon: TrendingUp },
-  { id: 'staffing', label: 'Staffing', icon: Users },
   { id: 'schedule', label: 'Schedule', icon: CalendarCheck },
+  { id: 'production', label: 'Production', icon: BarChart3 },
+  { id: 'staffing', label: 'Staffing', icon: Users },
+  { id: 'efficiency', label: 'Efficiency', icon: TrendingUp },
   { id: 'log', label: 'Run Log', icon: List },
 ];
 
 function App() {
-  const [activeTab, setActiveTab] = useState('production');
+  const [activeTab, setActiveTab] = useState('schedule');
   const data = useSheetData();
 
   if (data.loading && !data.runs.length) {
@@ -54,9 +54,12 @@ function App() {
       <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">Powder Ops Dashboard</h1>
-              <p className="text-sm text-gray-500">Production Analytics · EOD Report Data</p>
+            <div className="flex items-center gap-3">
+              <img src="/logo.svg" alt="Powder Ops" className="h-10 w-auto" />
+              <div>
+                <h1 className="text-xl font-bold text-gray-900">Powder Ops Dashboard</h1>
+                <p className="text-sm text-gray-500">Production Analytics · EOD Report Data</p>
+              </div>
             </div>
             <nav className="flex gap-1 bg-gray-100 rounded-lg p-1">
               {TABS.map((tab) => (
@@ -98,7 +101,7 @@ function App() {
         {activeTab === 'production' && <ProductionTab runs={data.runs} />}
         {activeTab === 'efficiency' && <EfficiencyTab runs={data.runs} />}
         {activeTab === 'staffing' && <StaffingTab runs={data.runs} />}
-        {activeTab === 'schedule' && <ScheduleTab runs={data.runs} schedule={data.schedule} />}
+        {activeTab === 'schedule' && <ScheduleTab runs={data.runs} schedule={data.schedule} snapshots={data.scheduleSnapshots} />}
         {activeTab === 'log' && <RunLog runs={data.runs} />}
       </main>
     </div>

@@ -1,4 +1,41 @@
 import { RefreshCw } from 'lucide-react';
+import { startOfWeek, endOfWeek, startOfMonth, endOfMonth, subWeeks, subMonths } from 'date-fns';
+
+function getQuickRange(key) {
+  const now = new Date();
+  switch (key) {
+    case 'this-week':
+      return { start: startOfWeek(now, { weekStartsOn: 1 }), end: endOfWeek(now, { weekStartsOn: 1 }) };
+    case 'last-week': {
+      const prev = subWeeks(now, 1);
+      return { start: startOfWeek(prev, { weekStartsOn: 1 }), end: endOfWeek(prev, { weekStartsOn: 1 }) };
+    }
+    case 'this-month':
+      return { start: startOfMonth(now), end: endOfMonth(now) };
+    case 'last-month': {
+      const prev = subMonths(now, 1);
+      return { start: startOfMonth(prev), end: endOfMonth(prev) };
+    }
+    default:
+      return { start: null, end: null };
+  }
+}
+
+const QUICK_RANGES = [
+  { key: 'last-week', label: 'Last Week' },
+  { key: 'this-week', label: 'This Week' },
+  { key: 'last-month', label: 'Last Month' },
+  { key: 'this-month', label: 'This Month' },
+];
+
+function isActiveRange(dateRange, key) {
+  const range = getQuickRange(key);
+  if (!dateRange.start || !dateRange.end || !range.start || !range.end) return false;
+  return (
+    dateRange.start.toDateString() === range.start.toDateString() &&
+    dateRange.end.toDateString() === range.end.toDateString()
+  );
+}
 
 export default function FilterBar({
   teams,
@@ -43,7 +80,7 @@ export default function FilterBar({
         </select>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 flex-wrap">
         <label className="text-sm font-medium text-gray-600">From</label>
         <input
           type="date"
@@ -68,6 +105,27 @@ export default function FilterBar({
           }
           className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm"
         />
+        <div className="flex gap-1">
+          {QUICK_RANGES.map((r) => (
+            <button
+              key={r.key}
+              onClick={() => {
+                if (isActiveRange(dateRange, r.key)) {
+                  setDateRange({ start: null, end: null });
+                } else {
+                  setDateRange(getQuickRange(r.key));
+                }
+              }}
+              className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
+                isActiveRange(dateRange, r.key)
+                  ? 'bg-powder-600 text-white'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="ml-auto flex items-center gap-3">

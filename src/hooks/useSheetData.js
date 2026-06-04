@@ -4,6 +4,7 @@ import { fetchSheetData, fetchScheduleData, refreshData, getTeams, getProducts }
 export function useSheetData() {
   const [allRuns, setAllRuns] = useState([]);
   const [schedule, setSchedule] = useState([]);
+  const [scheduleSnapshots, setScheduleSnapshots] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastRefresh, setLastRefresh] = useState(null);
@@ -16,9 +17,10 @@ export function useSheetData() {
     setLoading(true);
     setError(null);
     try {
-      const [runs, sched] = await Promise.all([fetchSheetData(), fetchScheduleData()]);
+      const [runs, schedResult] = await Promise.all([fetchSheetData(), fetchScheduleData()]);
       setAllRuns(runs);
-      setSchedule(sched);
+      setSchedule(schedResult.data);
+      setScheduleSnapshots(schedResult.snapshots);
       setLastRefresh(new Date());
     } catch (e) {
       setError(e.message);
@@ -31,9 +33,10 @@ export function useSheetData() {
     setLoading(true);
     try {
       await refreshData();
-      const [runs, sched] = await Promise.all([fetchSheetData(), fetchScheduleData()]);
+      const [runs, schedResult] = await Promise.all([fetchSheetData(), fetchScheduleData()]);
       setAllRuns(runs);
-      setSchedule(sched);
+      setSchedule(schedResult.data);
+      setScheduleSnapshots(schedResult.snapshots);
       setLastRefresh(new Date());
     } catch (e) {
       setError(e.message);
@@ -63,6 +66,7 @@ export function useSheetData() {
     runs,
     allRuns,
     schedule,
+    scheduleSnapshots,
     loading,
     error,
     lastRefresh,
