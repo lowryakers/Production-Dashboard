@@ -51,7 +51,7 @@ export default function StaffingTab({ runs }) {
     .map((w) => {
       const row = { week: w.week };
       teams.forEach((t) => {
-        row[t] = w[t] ? avg(w[t]).toFixed(1) : 0;
+        row[t] = w[t] ? Math.round(avg(w[t]) * 10) / 10 : 0;
       });
       return row;
     })

@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-  ResponsiveContainer, PieChart, Pie, Cell,
+  ResponsiveContainer,
 } from 'recharts';
 import { getTeamColor } from '../utils/parseSheet';
 
@@ -120,6 +120,11 @@ export default function ProductionTab({ runs }) {
   }, [runs]);
 
   const [selectedWeek, setSelectedWeek] = useState(weeks[0]?.key || '');
+  useEffect(() => {
+    if (weeks.length && !weeks.find((w) => w.key === selectedWeek)) {
+      setSelectedWeek(weeks[0].key);
+    }
+  }, [weeks, selectedWeek]);
 
   const teams = [...new Set(runs.map((r) => r.team))].sort();
 
@@ -148,8 +153,9 @@ export default function ProductionTab({ runs }) {
   const topProducts = Object.entries(productTotals)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 10)
-    .map(([name, value]) => ({ name: name.length > 40 ? name.slice(0, 40) + '…' : name, value }));
+    .map(([name, value]) => ({ name, value }));
 
+  const maxProductQty = topProducts[0]?.value || 1;
   const COLORS = ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4', '#ec4899', '#84cc16', '#f97316', '#6366f1'];
 
   return (
@@ -225,26 +231,26 @@ export default function ProductionTab({ runs }) {
 
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Top 10 Products</h3>
-          <ResponsiveContainer width="100%" height={280}>
-            <PieChart>
-              <Pie
-                data={topProducts}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={110}
-                dataKey="value"
-                label={({ name, percent }) => `${name.slice(0, 15)}… ${(percent * 100).toFixed(0)}%`}
-                labelLine={false}
-                fontSize={10}
-              >
-                {topProducts.map((_, i) => (
-                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip formatter={(v) => v.toLocaleString(undefined, { maximumFractionDigits: 0 })} />
-            </PieChart>
-          </ResponsiveContainer>
+          <div className="space-y-2.5">
+            {topProducts.map((p, i) => (
+              <div key={i}>
+                <div className="flex justify-between items-baseline mb-1">
+                  <span className="text-sm text-gray-700 leading-tight" title={p.name}>
+                    {p.name}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 ml-2 whitespace-nowrap">
+                    {p.value.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-100 rounded-full h-2">
+                  <div
+                    className="h-2 rounded-full"
+                    style={{ width: `${(p.value / maxProductQty) * 100}%`, backgroundColor: COLORS[i % COLORS.length] }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

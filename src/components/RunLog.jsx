@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getTeamColor } from '../utils/parseSheet';
 
 export default function RunLog({ runs }) {
   const [page, setPage] = useState(0);
+  useEffect(() => setPage(0), [runs]);
   const pageSize = 25;
   const totalPages = Math.ceil(runs.length / pageSize);
   const pageRuns = runs.slice(page * pageSize, (page + 1) * pageSize);

@@ -100,22 +100,22 @@ export default function EfficiencyTab({ runs }) {
           <div className="space-y-3">
             <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Top 5</h4>
             {topRuns.map((r, i) => (
-              <div key={i} className="flex justify-between items-center text-sm">
-                <span className="text-gray-700 truncate max-w-[60%]">
-                  {r.product.slice(0, 35)}{r.product.length > 35 ? '…' : ''}
+              <div key={i} className="flex justify-between items-start gap-2 text-sm">
+                <span className="text-gray-700 leading-tight" title={r.product}>
+                  {r.product}
                 </span>
-                <span className="font-semibold" style={{ color: getTeamColor(r.team) }}>
+                <span className="font-semibold whitespace-nowrap" style={{ color: getTeamColor(r.team) }}>
                   {r.unitsPerManHour.toFixed(0)} u/mh
                 </span>
               </div>
             ))}
             <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mt-4">Bottom 5</h4>
             {bottomRuns.map((r, i) => (
-              <div key={i} className="flex justify-between items-center text-sm">
-                <span className="text-gray-700 truncate max-w-[60%]">
-                  {r.product.slice(0, 35)}{r.product.length > 35 ? '…' : ''}
+              <div key={i} className="flex justify-between items-start gap-2 text-sm">
+                <span className="text-gray-700 leading-tight" title={r.product}>
+                  {r.product}
                 </span>
-                <span className="font-semibold text-red-500">
+                <span className="font-semibold text-red-500 whitespace-nowrap">
                   {r.unitsPerManHour.toFixed(0)} u/mh
                 </span>
               </div>

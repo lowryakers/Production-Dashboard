@@ -233,11 +233,11 @@ async function syncAll() {
   await Promise.all([syncEOD(), syncSchedule()]);
 }
 
-// Daily sync at 6:00 AM Central (11:00 UTC)
-cron.schedule('0 11 * * *', () => {
+// Daily sync at 6:00 AM Central
+cron.schedule('0 6 * * *', () => {
   console.log('[cron] Daily sync triggered');
   syncAll();
-}, { timezone: 'UTC' });
+}, { timezone: 'America/Chicago' });
 
 // --- API routes ---
 

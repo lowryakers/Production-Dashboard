@@ -46,7 +46,7 @@ function transformEODRow(row) {
   const product = (row['Product Name:'] || '').trim();
   const mo = (row['MO #: '] || row['MO #:'] || '').trim();
   const lot = (row['Lot #:'] || '').trim();
-  const quantity = parseFloat(row['Quantity Completed:']);
+  const quantity = parseFloat((row['Quantity Completed:'] || '').replace(/,/g, ''));
   const people = parseFloat(row['# of people working:']);
   const durationDecimal = parseFloat(row['Duration (decimal)']);
   const unitsPerHour = parseFloat(row['Units/Hour']);
@@ -67,7 +67,7 @@ function transformEODRow(row) {
 
   return {
     date,
-    dateStr: date.toISOString().split('T')[0],
+    dateStr: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
     week: getWeekKey(date),
     team,
     product,
@@ -133,10 +133,14 @@ export async function refreshData() {
 
 function getWeekKey(date) {
   const d = new Date(date);
+  const year = d.getFullYear();
+  const month = d.getMonth();
   const day = d.getDay();
   const diff = d.getDate() - day + (day === 0 ? -6 : 1);
   d.setDate(diff);
-  return d.toISOString().split('T')[0];
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}-${m}-${dd}`;
 }
 
 export function getTeamColor(team) {

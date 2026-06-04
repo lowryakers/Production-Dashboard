@@ -125,7 +125,9 @@ export default function ScheduleTab({ runs, schedule, snapshots = [] }) {
     const allScheduleEntries = selectedWeek === 'current' ? schedule : (snapshotEntries || []);
 
     const scheduledMOs = new Map();
+    const scheduleDates = [];
     allScheduleEntries.forEach((s) => {
+      if (s.date) scheduleDates.push(s.date);
       if (!s.mo) return;
       const key = normalizeMO(s.mo);
       if (!key) return;
@@ -133,8 +135,19 @@ export default function ScheduleTab({ runs, schedule, snapshots = [] }) {
       if (s.date) scheduledMOs.get(key).dates.push(s.date);
     });
 
+    // Only compare runs within the schedule's date range (± 1 day buffer)
+    const sortedDates = [...new Set(scheduleDates)].sort();
+    const weekStart = sortedDates[0] || '0000';
+    const weekEnd = sortedDates[sortedDates.length - 1] || '9999';
+    const startDate = new Date(weekStart + 'T00:00:00');
+    startDate.setDate(startDate.getDate() - 1);
+    const endDate = new Date(weekEnd + 'T00:00:00');
+    endDate.setDate(endDate.getDate() + 1);
+
+    const weekRuns = runs.filter((r) => r.date >= startDate && r.date <= endDate);
+
     const actualMOs = new Map();
-    runs.forEach((r) => {
+    weekRuns.forEach((r) => {
       if (!r.mo) return;
       const key = normalizeMO(r.mo);
       if (!key) return;
@@ -167,7 +180,7 @@ export default function ScheduleTab({ runs, schedule, snapshots = [] }) {
       if (!dailyMap[s.date]) dailyMap[s.date] = { date: s.date, scheduled: 0, completed: 0 };
       dailyMap[s.date].scheduled += 1;
     });
-    runs.forEach((r) => {
+    weekRuns.forEach((r) => {
       if (!dailyMap[r.dateStr]) dailyMap[r.dateStr] = { date: r.dateStr, scheduled: 0, completed: 0 };
       dailyMap[r.dateStr].completed += 1;
     });
