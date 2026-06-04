@@ -1,10 +1,126 @@
+import { useMemo, useState } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   ResponsiveContainer, PieChart, Pie, Cell,
 } from 'recharts';
 import { getTeamColor } from '../utils/parseSheet';
 
+const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+const DAY_NUMS = [1, 2, 3, 4, 5]; // Mon=1 ... Fri=5
+
+function WeeklyProductionGrid({ runs, selectedWeek }) {
+  const weekRuns = useMemo(() => {
+    return runs.filter((r) => r.week === selectedWeek);
+  }, [runs, selectedWeek]);
+
+  const grid = useMemo(() => {
+    const teamDays = new Map();
+    weekRuns.forEach((r) => {
+      if (!teamDays.has(r.team)) teamDays.set(r.team, {});
+      const dayOfWeek = r.date.getDay();
+      const dayIdx = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Mon=0..Sun=6
+      const dayName = DAYS[dayIdx];
+      if (!dayName) return;
+      if (!teamDays.get(r.team)[dayName]) teamDays.get(r.team)[dayName] = [];
+      teamDays.get(r.team)[dayName].push(r);
+    });
+
+    return [...teamDays.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  }, [weekRuns]);
+
+  const weekTotals = useMemo(() => {
+    const totalUnits = weekRuns.reduce((s, r) => s + r.quantity, 0);
+    const totalRuns = weekRuns.length;
+    const totalManHours = weekRuns.reduce((s, r) => s + (r.manHours || 0), 0);
+    return { totalUnits, totalRuns, totalManHours };
+  }, [weekRuns]);
+
+  if (!weekRuns.length) {
+    return <p className="text-gray-400 text-sm py-4 text-center">No production data for this week</p>;
+  }
+
+  return (
+    <div>
+      <div className="flex gap-4 px-5 py-3 text-sm text-gray-500 border-b border-gray-100">
+        <span><strong className="text-gray-900">{weekTotals.totalUnits.toLocaleString(undefined, { maximumFractionDigits: 0 })}</strong> units</span>
+        <span><strong className="text-gray-900">{weekTotals.totalRuns}</strong> runs</span>
+        <span><strong className="text-gray-900">{weekTotals.totalManHours.toLocaleString(undefined, { maximumFractionDigits: 0 })}</strong> man-hours</span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-gray-50">
+              <th className="px-4 py-2.5 text-left font-medium text-gray-600 sticky left-0 bg-gray-50 min-w-[90px]">Team</th>
+              {DAYS.map((day) => (
+                <th key={day} className="px-4 py-2.5 text-left font-medium text-gray-600 min-w-[180px]">{day}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {grid.map(([team, days]) => (
+              <tr key={team} className="border-t border-gray-100">
+                <td className="px-4 py-2.5 sticky left-0 bg-white align-top">
+                  <span className="font-semibold text-sm" style={{ color: getTeamColor(team) }}>{team}</span>
+                </td>
+                {DAYS.map((day) => {
+                  const dayRuns = days[day] || [];
+                  return (
+                    <td key={day} className="px-4 py-2.5 align-top">
+                      {dayRuns.length === 0 ? (
+                        <span className="text-gray-300">—</span>
+                      ) : (
+                        <div className="space-y-1">
+                          {dayRuns.map((r, i) => (
+                            <div
+                              key={i}
+                              className="text-xs rounded-md px-2 py-1.5 border"
+                              style={{
+                                backgroundColor: `${getTeamColor(team)}10`,
+                                borderColor: `${getTeamColor(team)}30`,
+                              }}
+                            >
+                              <div className="flex justify-between items-start gap-1">
+                                <span className="font-semibold text-gray-800">{r.mo || '—'}</span>
+                                <span className="font-semibold whitespace-nowrap" style={{ color: getTeamColor(team) }}>
+                                  {r.quantity.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                                </span>
+                              </div>
+                              <div className="text-gray-500 leading-tight">{r.product?.slice(0, 40)}</div>
+                              {r.people && (
+                                <div className="text-gray-400 mt-0.5">{r.people}p · {r.duration?.toFixed(1) || '?'}h</div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 export default function ProductionTab({ runs }) {
+  const weeks = useMemo(() => {
+    const set = [...new Set(runs.map((r) => r.week))].sort((a, b) => b.localeCompare(a));
+    return set.map((w) => {
+      const mon = new Date(w + 'T00:00:00');
+      const fri = new Date(mon);
+      fri.setDate(mon.getDate() + 4);
+      return {
+        key: w,
+        label: `${mon.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${fri.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`,
+      };
+    });
+  }, [runs]);
+
+  const [selectedWeek, setSelectedWeek] = useState(weeks[0]?.key || '');
+
   const teams = [...new Set(runs.map((r) => r.team))].sort();
 
   const weeklyData = {};
@@ -38,8 +154,25 @@ export default function ProductionTab({ runs }) {
 
   return (
     <div className="space-y-6">
+      {/* Weekly production grid */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="px-5 py-3.5 border-b border-gray-100 flex items-center gap-4">
+          <h3 className="text-lg font-semibold text-gray-900">Weekly Production</h3>
+          <select
+            value={selectedWeek}
+            onChange={(e) => setSelectedWeek(e.target.value)}
+            className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm bg-white focus:ring-2 focus:ring-powder-500 focus:border-powder-500"
+          >
+            {weeks.map((w) => (
+              <option key={w.key} value={w.key}>{w.label}</option>
+            ))}
+          </select>
+        </div>
+        <WeeklyProductionGrid runs={runs} selectedWeek={selectedWeek} />
+      </div>
+
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Weekly Production by Team</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Production by Team (All Weeks)</h3>
         <ResponsiveContainer width="100%" height={350}>
           <BarChart data={weeklyChart}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
