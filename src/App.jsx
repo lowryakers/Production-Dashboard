@@ -6,12 +6,14 @@ import ProductionTab from './components/ProductionTab';
 import EfficiencyTab from './components/EfficiencyTab';
 import StaffingTab from './components/StaffingTab';
 import RunLog from './components/RunLog';
-import { BarChart3, TrendingUp, Users, List } from 'lucide-react';
+import ScheduleTab from './components/ScheduleTab';
+import { BarChart3, TrendingUp, Users, List, CalendarCheck } from 'lucide-react';
 
 const TABS = [
   { id: 'production', label: 'Production', icon: BarChart3 },
   { id: 'efficiency', label: 'Efficiency', icon: TrendingUp },
   { id: 'staffing', label: 'Staffing', icon: Users },
+  { id: 'schedule', label: 'Schedule', icon: CalendarCheck },
   { id: 'log', label: 'Run Log', icon: List },
 ];
 
@@ -96,6 +98,7 @@ function App() {
         {activeTab === 'production' && <ProductionTab runs={data.runs} />}
         {activeTab === 'efficiency' && <EfficiencyTab runs={data.runs} />}
         {activeTab === 'staffing' && <StaffingTab runs={data.runs} />}
+        {activeTab === 'schedule' && <ScheduleTab runs={data.runs} schedule={data.schedule} />}
         {activeTab === 'log' && <RunLog runs={data.runs} />}
       </main>
     </div>

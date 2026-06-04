@@ -1,8 +1,6 @@
 import Papa from 'papaparse';
 
-const GOOGLE_SHEETS_URL =
-  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ04WCKS8CMYHwd-6Ae5MAN5sYpEhJ3RiYMoxtX0SroNoeuYjxMhWfbVvQAy2xuKAnk62F6VeC4blhC/pub?output=csv';
-const LOCAL_CSV = '/data.csv';
+const API_BASE = import.meta.env.DEV ? 'http://localhost:3000' : '';
 
 function parseTime(timeStr) {
   if (!timeStr) return null;
@@ -42,73 +40,87 @@ function parseDate(dateStr) {
   return d;
 }
 
+function transformEODRow(row) {
+  const date = parseDate(row["Today's Date"]);
+  const team = normalizeTeam(row['Team']);
+  const product = (row['Product Name:'] || '').trim();
+  const mo = (row['MO #: '] || row['MO #:'] || '').trim();
+  const lot = (row['Lot #:'] || '').trim();
+  const quantity = parseFloat(row['Quantity Completed:']);
+  const people = parseFloat(row['# of people working:']);
+  const durationDecimal = parseFloat(row['Duration (decimal)']);
+  const unitsPerHour = parseFloat(row['Units/Hour']);
+  const startTime = row['Project Start Time:'];
+  const endTime = row['Project End Time:'];
+  const notes = (row['Notes/Observations on this MO # or Lot #:'] || '').trim();
+  const reviewer = (row['Reviewed By (QA)'] || '').trim();
+  const room = (row['Room'] || '').trim();
+
+  if (!date || !team || isNaN(quantity) || quantity <= 0) return null;
+
+  const duration = !isNaN(durationDecimal) && durationDecimal > 0
+    ? durationDecimal
+    : parseDuration(startTime, endTime);
+
+  const manHours = duration && people ? duration * people : null;
+  const unitsPerManHour = manHours && manHours > 0 ? quantity / manHours : null;
+
+  return {
+    date,
+    dateStr: date.toISOString().split('T')[0],
+    week: getWeekKey(date),
+    team,
+    product,
+    mo,
+    lot,
+    quantity,
+    people: isNaN(people) ? null : people,
+    duration,
+    manHours,
+    unitsPerManHour,
+    unitsPerHour: !isNaN(unitsPerHour) ? unitsPerHour : null,
+    startTime,
+    endTime,
+    notes,
+    reviewer,
+    room,
+  };
+}
+
 export async function fetchSheetData() {
-  let text;
   try {
-    const response = await fetch(GOOGLE_SHEETS_URL);
-    if (!response.ok) throw new Error('Sheets unavailable');
-    text = await response.text();
+    const res = await fetch(`${API_BASE}/api/eod`);
+    if (res.ok) {
+      const { data } = await res.json();
+      return data.map(transformEODRow).filter(Boolean).sort((a, b) => b.date - a.date);
+    }
+  } catch {}
+
+  // Fallback: local CSV for dev/offline
+  const res = await fetch('/data.csv');
+  const text = await res.text();
+  const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
+  return data.map(transformEODRow).filter(Boolean).sort((a, b) => b.date - a.date);
+}
+
+export async function fetchScheduleData() {
+  try {
+    const res = await fetch(`${API_BASE}/api/schedule`);
+    if (res.ok) {
+      const json = await res.json();
+      return json.data || [];
+    }
+  } catch {}
+  return [];
+}
+
+export async function refreshData() {
+  try {
+    const res = await fetch(`${API_BASE}/api/refresh`, { method: 'POST' });
+    return await res.json();
   } catch {
-    const response = await fetch(LOCAL_CSV);
-    text = await response.text();
+    return null;
   }
-
-  const { data } = Papa.parse(text, {
-    header: true,
-    skipEmptyLines: true,
-  });
-
-  const runs = data
-    .map((row) => {
-      const date = parseDate(row["Today's Date"]);
-      const team = normalizeTeam(row['Team']);
-      const product = (row['Product Name:'] || '').trim();
-      const mo = (row['MO #: '] || row['MO #:'] || '').trim();
-      const lot = (row['Lot #:'] || '').trim();
-      const quantity = parseFloat(row['Quantity Completed:']);
-      const people = parseFloat(row['# of people working:']);
-      const durationDecimal = parseFloat(row['Duration (decimal)']);
-      const unitsPerHour = parseFloat(row['Units/Hour']);
-      const startTime = row['Project Start Time:'];
-      const endTime = row['Project End Time:'];
-      const notes = (row['Notes/Observations on this MO # or Lot #:'] || '').trim();
-      const reviewer = (row['Reviewed By (QA)'] || '').trim();
-      const room = (row['Room'] || '').trim();
-
-      if (!date || !team || isNaN(quantity) || quantity <= 0) return null;
-
-      const duration = !isNaN(durationDecimal) && durationDecimal > 0
-        ? durationDecimal
-        : parseDuration(startTime, endTime);
-
-      const manHours = duration && people ? duration * people : null;
-      const unitsPerManHour = manHours && manHours > 0 ? quantity / manHours : null;
-
-      return {
-        date,
-        dateStr: date.toISOString().split('T')[0],
-        week: getWeekKey(date),
-        team,
-        product,
-        mo,
-        lot,
-        quantity,
-        people: isNaN(people) ? null : people,
-        duration,
-        manHours,
-        unitsPerManHour,
-        unitsPerHour: !isNaN(unitsPerHour) ? unitsPerHour : null,
-        startTime,
-        endTime,
-        notes,
-        reviewer,
-        room,
-      };
-    })
-    .filter(Boolean)
-    .sort((a, b) => b.date - a.date);
-
-  return runs;
 }
 
 function getWeekKey(date) {

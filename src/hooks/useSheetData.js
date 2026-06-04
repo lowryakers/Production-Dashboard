@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { fetchSheetData, getTeams, getProducts } from '../utils/parseSheet';
+import { fetchSheetData, fetchScheduleData, refreshData, getTeams, getProducts } from '../utils/parseSheet';
 
 export function useSheetData() {
   const [allRuns, setAllRuns] = useState([]);
+  const [schedule, setSchedule] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastRefresh, setLastRefresh] = useState(null);
@@ -15,8 +16,24 @@ export function useSheetData() {
     setLoading(true);
     setError(null);
     try {
-      const runs = await fetchSheetData();
+      const [runs, sched] = await Promise.all([fetchSheetData(), fetchScheduleData()]);
       setAllRuns(runs);
+      setSchedule(sched);
+      setLastRefresh(new Date());
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const refresh = useCallback(async () => {
+    setLoading(true);
+    try {
+      await refreshData();
+      const [runs, sched] = await Promise.all([fetchSheetData(), fetchScheduleData()]);
+      setAllRuns(runs);
+      setSchedule(sched);
       setLastRefresh(new Date());
     } catch (e) {
       setError(e.message);
@@ -45,10 +62,11 @@ export function useSheetData() {
   return {
     runs,
     allRuns,
+    schedule,
     loading,
     error,
     lastRefresh,
-    refresh: loadData,
+    refresh,
     teams,
     products,
     teamFilter,
