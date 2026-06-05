@@ -98,7 +98,7 @@ function App() {
 
         <KPICards runs={data.runs} />
 
-        {activeTab === 'production' && <ProductionTab runs={data.runs} />}
+        {activeTab === 'production' && <ProductionTab runs={data.runs} schedule={data.schedule} />}
         {activeTab === 'efficiency' && <EfficiencyTab runs={data.runs} />}
         {activeTab === 'staffing' && <StaffingTab runs={data.runs} />}
         {activeTab === 'schedule' && <ScheduleTab runs={data.runs} schedule={data.schedule} snapshots={data.scheduleSnapshots} />}

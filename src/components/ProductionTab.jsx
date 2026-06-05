@@ -107,7 +107,13 @@ function WeeklyProductionGrid({ runs, selectedWeek, moColorMap }) {
   );
 }
 
-export default function ProductionTab({ runs }) {
+function normalizeMO(mo) {
+  if (!mo) return null;
+  const m = mo.replace(/[^0-9]/g, '');
+  return m ? `MO${m}` : null;
+}
+
+export default function ProductionTab({ runs, schedule = [] }) {
   const weeks = useMemo(() => {
     const set = [...new Set(runs.map((r) => r.week))].sort((a, b) => b.localeCompare(a));
     return set.map((w) => {
@@ -132,6 +138,39 @@ export default function ProductionTab({ runs }) {
     const weekMOs = runs.filter((r) => r.week === selectedWeek).map((r) => r.mo).filter(Boolean);
     return buildMOColorMap(weekMOs);
   }, [runs, selectedWeek]);
+
+  const scheduleComparison = useMemo(() => {
+    if (!schedule.length) return null;
+
+    const weekRuns = runs.filter((r) => r.week === selectedWeek);
+    if (!weekRuns.length) return null;
+
+    const scheduledMOs = new Set();
+    schedule.forEach((s) => {
+      const key = normalizeMO(s.mo);
+      if (key) scheduledMOs.add(key);
+    });
+
+    const actualMOs = new Map();
+    weekRuns.forEach((r) => {
+      const key = normalizeMO(r.mo);
+      if (!key) return;
+      if (!actualMOs.has(key)) actualMOs.set(key, { mo: key, product: r.product, team: r.team, totalQty: 0 });
+      actualMOs.get(key).totalQty += r.quantity;
+    });
+
+    const unplanned = [];
+    const onSchedule = [];
+    for (const [mo, info] of actualMOs) {
+      if (scheduledMOs.has(mo)) {
+        onSchedule.push(info);
+      } else {
+        unplanned.push(info);
+      }
+    }
+
+    return { unplanned, onSchedule, scheduledCount: scheduledMOs.size };
+  }, [runs, schedule, selectedWeek]);
 
   const teams = [...new Set(runs.map((r) => r.team))].sort();
 
@@ -185,6 +224,54 @@ export default function ProductionTab({ runs }) {
       </div>
 
       <MOLegend moColorMap={moColorMap} label="Manufacturing Orders This Week" />
+
+      {/* Schedule vs Actual comparison */}
+      {scheduleComparison && (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">Schedule vs. Actual</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+            <div className="text-center p-3 bg-gray-50 rounded-lg">
+              <div className="text-2xl font-bold text-gray-900">{scheduleComparison.onSchedule.length + scheduleComparison.unplanned.length}</div>
+              <div className="text-xs text-gray-500 mt-0.5">MOs Worked</div>
+            </div>
+            <div className="text-center p-3 bg-emerald-50 rounded-lg">
+              <div className="text-2xl font-bold text-emerald-600">{scheduleComparison.onSchedule.length}</div>
+              <div className="text-xs text-gray-500 mt-0.5">On Schedule</div>
+            </div>
+            <div className="text-center p-3 rounded-lg" style={{ backgroundColor: scheduleComparison.unplanned.length > 0 ? '#fef3c7' : '#f0fdf4' }}>
+              <div className={`text-2xl font-bold ${scheduleComparison.unplanned.length > 0 ? 'text-amber-600' : 'text-emerald-600'}`}>
+                {scheduleComparison.unplanned.length}
+              </div>
+              <div className="text-xs text-gray-500 mt-0.5">Unscheduled</div>
+            </div>
+          </div>
+          {scheduleComparison.unplanned.length > 0 && (
+            <div>
+              <h4 className="text-sm font-semibold text-amber-700 mb-2">Unscheduled MOs Released to Production</h4>
+              <div className="space-y-1.5">
+                {scheduleComparison.unplanned.map((u) => {
+                  const c = getMOColor(moColorMap, u.mo);
+                  return (
+                    <div key={u.mo} className="flex items-center justify-between text-sm px-3 py-2 rounded-lg border" style={{ backgroundColor: c.bg, borderColor: c.border }}>
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold" style={{ color: c.text }}>{u.mo}</span>
+                        <span className="text-gray-500">{u.product?.slice(0, 50)}</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-xs text-gray-500">
+                        <span style={{ color: getTeamColor(u.team) }}>{u.team}</span>
+                        <span className="font-medium text-gray-700">{u.totalQty.toLocaleString(undefined, { maximumFractionDigits: 0 })} units</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          {scheduleComparison.unplanned.length === 0 && (
+            <p className="text-sm text-emerald-600 text-center py-1">All MOs worked this week were on the schedule</p>
+          )}
+        </div>
+      )}
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Production by Team (All Weeks)</h3>
