@@ -4,17 +4,14 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { fetchSnapshot } from '../utils/parseSheet';
+import { buildMOColorMap, getMOColor } from '../utils/moColors';
+import MOLegend from './MOLegend';
 
 const STATUS_COLORS = {
   completed: '#10b981',
   scheduled: '#3b82f6',
   unplanned: '#f59e0b',
 };
-
-const ROOM_COLORS = [
-  '#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444',
-  '#06b6d4', '#ec4899', '#84cc16', '#f97316', '#6366f1',
-];
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
@@ -30,7 +27,7 @@ function getDayName(label) {
   return match ? match[1] : label;
 }
 
-function WeeklyGrid({ entries }) {
+function WeeklyGrid({ entries, moColorMap }) {
   const rooms = useMemo(() => {
     const map = new Map();
     entries.forEach((e) => {
@@ -63,7 +60,7 @@ function WeeklyGrid({ entries }) {
           </tr>
         </thead>
         <tbody>
-          {rooms.map(([room, days], ri) => (
+          {rooms.map(([room, days]) => (
             <tr key={room} className="border-t border-gray-100">
               <td className="px-4 py-2.5 font-semibold text-gray-700 sticky left-0 bg-white align-top">{room}</td>
               {DAYS.map((day) => {
@@ -74,19 +71,19 @@ function WeeklyGrid({ entries }) {
                       <span className="text-gray-300">—</span>
                     ) : (
                       <div className="space-y-1">
-                        {dayEntries.map((e, i) => (
-                          <div
-                            key={i}
-                            className="text-xs rounded-md px-2 py-1.5 border"
-                            style={{
-                              backgroundColor: `${ROOM_COLORS[ri % ROOM_COLORS.length]}10`,
-                              borderColor: `${ROOM_COLORS[ri % ROOM_COLORS.length]}30`,
-                            }}
-                          >
-                            <div className="font-semibold text-gray-800">{e.mo || '—'}</div>
-                            <div className="text-gray-500 leading-tight">{e.product?.slice(0, 50) || e.raw?.slice(0, 50)}</div>
-                          </div>
-                        ))}
+                        {dayEntries.map((e, i) => {
+                          const c = getMOColor(moColorMap, e.mo);
+                          return (
+                            <div
+                              key={i}
+                              className="text-xs rounded-md px-2 py-1.5 border"
+                              style={{ backgroundColor: c.bg, borderColor: c.border }}
+                            >
+                              <div className="font-semibold" style={{ color: c.text }}>{e.mo || '—'}</div>
+                              <div className="text-gray-500 leading-tight">{e.product?.slice(0, 50) || e.raw?.slice(0, 50)}</div>
+                            </div>
+                          );
+                        })}
                       </div>
                     )}
                   </td>
@@ -119,6 +116,11 @@ export default function ScheduleTab({ runs, schedule, snapshots = [] }) {
 
   const displayEntries = selectedWeek === 'current' ? schedule : (snapshotEntries || []);
 
+  const moColorMap = useMemo(() => {
+    const mos = displayEntries.map((e) => e.mo).filter(Boolean);
+    return buildMOColorMap(mos);
+  }, [displayEntries]);
+
   const analysis = useMemo(() => {
     if (!schedule.length && !snapshots.length) return null;
 
@@ -135,7 +137,6 @@ export default function ScheduleTab({ runs, schedule, snapshots = [] }) {
       if (s.date) scheduledMOs.get(key).dates.push(s.date);
     });
 
-    // Only compare runs within the schedule's date range (± 1 day buffer)
     const sortedDates = [...new Set(scheduleDates)].sort();
     const weekStart = sortedDates[0] || '0000';
     const weekEnd = sortedDates[sortedDates.length - 1] || '9999';
@@ -235,8 +236,11 @@ export default function ScheduleTab({ runs, schedule, snapshots = [] }) {
             {selectedWeek === 'current' ? 'Current Weekly Schedule' : snapshots.find((s) => s.id === selectedWeek)?.weekLabel || 'Schedule'}
           </h3>
         </div>
-        <WeeklyGrid entries={displayEntries} />
+        <WeeklyGrid entries={displayEntries} moColorMap={moColorMap} />
       </div>
+
+      {/* MO Legend */}
+      <MOLegend moColorMap={moColorMap} label="Scheduled Manufacturing Orders" />
 
       {/* Adherence summary */}
       {analysis && (

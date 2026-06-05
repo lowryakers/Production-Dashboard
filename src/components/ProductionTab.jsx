@@ -4,11 +4,13 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { getTeamColor } from '../utils/parseSheet';
+import { buildMOColorMap, getMOColor } from '../utils/moColors';
+import MOLegend from './MOLegend';
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 const DAY_NUMS = [1, 2, 3, 4, 5]; // Mon=1 ... Fri=5
 
-function WeeklyProductionGrid({ runs, selectedWeek }) {
+function WeeklyProductionGrid({ runs, selectedWeek, moColorMap }) {
   const weekRuns = useMemo(() => {
     return runs.filter((r) => r.week === selectedWeek);
   }, [runs, selectedWeek]);
@@ -70,17 +72,16 @@ function WeeklyProductionGrid({ runs, selectedWeek }) {
                         <span className="text-gray-300">—</span>
                       ) : (
                         <div className="space-y-1">
-                          {dayRuns.map((r, i) => (
+                          {dayRuns.map((r, i) => {
+                            const c = getMOColor(moColorMap, r.mo);
+                            return (
                             <div
                               key={i}
                               className="text-xs rounded-md px-2 py-1.5 border"
-                              style={{
-                                backgroundColor: `${getTeamColor(team)}10`,
-                                borderColor: `${getTeamColor(team)}30`,
-                              }}
+                              style={{ backgroundColor: c.bg, borderColor: c.border }}
                             >
                               <div className="flex justify-between items-start gap-1">
-                                <span className="font-semibold text-gray-800">{r.mo || '—'}</span>
+                                <span className="font-semibold" style={{ color: c.text }}>{r.mo || '—'}</span>
                                 <span className="font-semibold whitespace-nowrap" style={{ color: getTeamColor(team) }}>
                                   {r.quantity.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                                 </span>
@@ -90,7 +91,8 @@ function WeeklyProductionGrid({ runs, selectedWeek }) {
                                 <div className="text-gray-400 mt-0.5">{r.people}p · {r.duration?.toFixed(1) || '?'}h</div>
                               )}
                             </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       )}
                     </td>
@@ -125,6 +127,11 @@ export default function ProductionTab({ runs }) {
       setSelectedWeek(weeks[0].key);
     }
   }, [weeks, selectedWeek]);
+
+  const moColorMap = useMemo(() => {
+    const weekMOs = runs.filter((r) => r.week === selectedWeek).map((r) => r.mo).filter(Boolean);
+    return buildMOColorMap(weekMOs);
+  }, [runs, selectedWeek]);
 
   const teams = [...new Set(runs.map((r) => r.team))].sort();
 
@@ -174,8 +181,10 @@ export default function ProductionTab({ runs }) {
             ))}
           </select>
         </div>
-        <WeeklyProductionGrid runs={runs} selectedWeek={selectedWeek} />
+        <WeeklyProductionGrid runs={runs} selectedWeek={selectedWeek} moColorMap={moColorMap} />
       </div>
+
+      <MOLegend moColorMap={moColorMap} label="Manufacturing Orders This Week" />
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Production by Team (All Weeks)</h3>
