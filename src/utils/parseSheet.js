@@ -87,18 +87,38 @@ function transformEODRow(row) {
   };
 }
 
+function normalizeProduct(p) {
+  return (p || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
 function normalizeMOs(runs) {
   const digits = (mo) => mo.replace(/[^0-9]/g, '');
-  const allMOs = [...new Set(runs.map((r) => r.mo).filter(Boolean))];
-  const moDigits = allMOs.map((mo) => ({ mo, d: digits(mo) })).filter((x) => x.d);
+
+  const moInfo = new Map();
+  runs.forEach((r) => {
+    if (!r.mo) return;
+    if (!moInfo.has(r.mo)) moInfo.set(r.mo, { d: digits(r.mo), products: new Set() });
+    if (r.product) moInfo.get(r.mo).products.add(normalizeProduct(r.product));
+  });
+
+  const productsOverlap = (a, b) => {
+    if (!a.size || !b.size) return true;
+    for (const p of a) {
+      for (const q of b) {
+        if (p.includes(q) || q.includes(p)) return true;
+      }
+    }
+    return false;
+  };
 
   const remap = {};
-  for (const short of moDigits) {
-    for (const long of moDigits) {
-      if (long.d.length > short.d.length && long.d.endsWith(short.d)) {
-        const existing = remap[short.mo];
-        if (!existing || digits(existing).length < long.d.length) {
-          remap[short.mo] = long.mo;
+  for (const [shortMO, shortInfo] of moInfo) {
+    for (const [longMO, longInfo] of moInfo) {
+      if (longInfo.d.length > shortInfo.d.length && longInfo.d.endsWith(shortInfo.d)) {
+        if (!productsOverlap(shortInfo.products, longInfo.products)) continue;
+        const existing = remap[shortMO];
+        if (!existing || digits(existing).length < longInfo.d.length) {
+          remap[shortMO] = longMO;
         }
       }
     }
