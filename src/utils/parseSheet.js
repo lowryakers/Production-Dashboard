@@ -87,12 +87,34 @@ function transformEODRow(row) {
   };
 }
 
+function normalizeMOs(runs) {
+  const digits = (mo) => mo.replace(/[^0-9]/g, '');
+  const allMOs = [...new Set(runs.map((r) => r.mo).filter(Boolean))];
+  const moDigits = allMOs.map((mo) => ({ mo, d: digits(mo) })).filter((x) => x.d);
+
+  const remap = {};
+  for (const short of moDigits) {
+    for (const long of moDigits) {
+      if (long.d.length > short.d.length && long.d.endsWith(short.d)) {
+        const existing = remap[short.mo];
+        if (!existing || digits(existing).length < long.d.length) {
+          remap[short.mo] = long.mo;
+        }
+      }
+    }
+  }
+
+  if (!Object.keys(remap).length) return runs;
+  return runs.map((r) => r.mo && remap[r.mo] ? { ...r, mo: remap[r.mo] } : r);
+}
+
 export async function fetchSheetData() {
   try {
     const res = await fetch(`${API_BASE}/api/eod`);
     if (res.ok) {
       const { data } = await res.json();
-      return data.map(transformEODRow).filter(Boolean).sort((a, b) => b.date - a.date);
+      const runs = data.map(transformEODRow).filter(Boolean).sort((a, b) => b.date - a.date);
+      return normalizeMOs(runs);
     }
   } catch {}
 
@@ -100,7 +122,8 @@ export async function fetchSheetData() {
   const res = await fetch('/data.csv');
   const text = await res.text();
   const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
-  return data.map(transformEODRow).filter(Boolean).sort((a, b) => b.date - a.date);
+  const runs = data.map(transformEODRow).filter(Boolean).sort((a, b) => b.date - a.date);
+  return normalizeMOs(runs);
 }
 
 export async function fetchScheduleData() {
