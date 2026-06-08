@@ -64,6 +64,7 @@ function transformEODRow(row) {
 
   const manHours = duration && people ? duration * people : null;
   const unitsPerManHour = manHours && manHours > 0 ? quantity / manHours : null;
+  const unitsPerMinute = duration && duration > 0 ? quantity / (duration * 60) : null;
 
   return {
     date,
@@ -78,6 +79,7 @@ function transformEODRow(row) {
     duration,
     manHours,
     unitsPerManHour,
+    unitsPerMinute,
     unitsPerHour: !isNaN(unitsPerHour) ? unitsPerHour : null,
     startTime,
     endTime,

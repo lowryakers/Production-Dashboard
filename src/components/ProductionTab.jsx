@@ -87,8 +87,11 @@ function WeeklyProductionGrid({ runs, selectedWeek, moColorMap }) {
                                 </span>
                               </div>
                               <div className="text-gray-500 leading-tight">{r.product?.slice(0, 40)}</div>
-                              {r.people && (
-                                <div className="text-gray-400 mt-0.5">{r.people}p · {r.duration?.toFixed(1) || '?'}h</div>
+                              {(r.people || r.unitsPerMinute) && (
+                                <div className="text-gray-400 mt-0.5">
+                                  {r.people ? `${r.people}p · ${r.duration?.toFixed(1) || '?'}h` : ''}
+                                  {r.unitsPerMinute ? `${r.people ? ' · ' : ''}${r.unitsPerMinute.toFixed(1)} u/min` : ''}
+                                </div>
                               )}
                             </div>
                             );

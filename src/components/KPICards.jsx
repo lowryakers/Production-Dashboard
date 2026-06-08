@@ -1,4 +1,4 @@
-import { Package, Clock, Users, TrendingUp } from 'lucide-react';
+import { Package, Clock, Users, TrendingUp, Zap } from 'lucide-react';
 
 function median(arr) {
   if (!arr.length) return 0;
@@ -13,8 +13,8 @@ export default function KPICards({ runs }) {
   const totalManHours = runs.reduce((s, r) => s + (r.manHours || 0), 0);
   const runsWithEfficiency = runs.filter((r) => r.unitsPerManHour != null);
   const medianEfficiency = median(runsWithEfficiency.map((r) => r.unitsPerManHour));
-  const avgPeople = runs.filter((r) => r.people).reduce((s, r) => s + r.people, 0) /
-    (runs.filter((r) => r.people).length || 1);
+  const runsWithUPM = runs.filter((r) => r.unitsPerMinute != null);
+  const medianUPM = median(runsWithUPM.map((r) => r.unitsPerMinute));
 
   const cards = [
     {
@@ -36,6 +36,12 @@ export default function KPICards({ runs }) {
       color: 'text-purple-600 bg-purple-50',
     },
     {
+      label: 'Median Units/Min',
+      value: medianUPM.toLocaleString(undefined, { maximumFractionDigits: 1 }),
+      icon: Zap,
+      color: 'text-cyan-600 bg-cyan-50',
+    },
+    {
       label: 'Median Units/Man-Hour',
       value: medianEfficiency.toLocaleString(undefined, { maximumFractionDigits: 0 }),
       icon: TrendingUp,
@@ -44,7 +50,7 @@ export default function KPICards({ runs }) {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
       {cards.map((c) => (
         <div key={c.label} className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
           <div className="flex items-center justify-between mb-3">

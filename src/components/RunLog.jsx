@@ -45,7 +45,8 @@ export default function RunLog({ runs }) {
               <th className="px-4 py-2.5 font-medium text-gray-600 text-right">Qty</th>
               <th className="px-4 py-2.5 font-medium text-gray-600 text-right">People</th>
               <th className="px-4 py-2.5 font-medium text-gray-600 text-right">Duration</th>
-              <th className="px-4 py-2.5 font-medium text-gray-600 text-right">Units/Man-Hr</th>
+              <th className="px-4 py-2.5 font-medium text-gray-600 text-right">U/Min</th>
+              <th className="px-4 py-2.5 font-medium text-gray-600 text-right">U/Man-Hr</th>
               <th className="px-4 py-2.5 font-medium text-gray-600">Notes</th>
             </tr>
           </thead>
@@ -73,6 +74,9 @@ export default function RunLog({ runs }) {
                 <td className="px-4 py-2.5 text-right">{r.people ?? '–'}</td>
                 <td className="px-4 py-2.5 text-right">
                   {r.duration ? `${r.duration.toFixed(1)}h` : '–'}
+                </td>
+                <td className="px-4 py-2.5 text-right font-medium">
+                  {r.unitsPerMinute ? r.unitsPerMinute.toFixed(1) : '–'}
                 </td>
                 <td className="px-4 py-2.5 text-right font-medium">
                   {r.unitsPerManHour ? r.unitsPerManHour.toFixed(0) : '–'}
