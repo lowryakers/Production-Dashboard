@@ -1,67 +1,43 @@
 import { useState } from 'react';
-import { useSheetData } from './hooks/useSheetData';
-import FilterBar from './components/FilterBar';
-import KPICards from './components/KPICards';
-import ProductionTab from './components/ProductionTab';
-import EfficiencyTab from './components/EfficiencyTab';
-import StaffingTab from './components/StaffingTab';
-import RunLog from './components/RunLog';
-import ScheduleTab from './components/ScheduleTab';
-import { BarChart3, TrendingUp, Users, List, CalendarCheck } from 'lucide-react';
+import { Shield, Wrench, ClipboardCheck, Thermometer, Droplets, ScrollText, LayoutDashboard, Lock } from 'lucide-react';
+import ComplianceDashboard from './components/compliance/ComplianceDashboard.jsx';
+import EquipmentPanel from './components/compliance/EquipmentPanel.jsx';
+import PMPanel from './components/compliance/PMPanel.jsx';
+import ChecklistPanel from './components/compliance/ChecklistPanel.jsx';
+import CalibrationPanel from './components/compliance/CalibrationPanel.jsx';
+import SanitationPanel from './components/compliance/SanitationPanel.jsx';
+import LOTOPanel from './components/compliance/LOTOPanel.jsx';
+import AuditLogPanel from './components/compliance/AuditLogPanel.jsx';
 
 const TABS = [
-  { id: 'schedule', label: 'Schedule', icon: CalendarCheck },
-  { id: 'production', label: 'Production', icon: BarChart3 },
-  { id: 'staffing', label: 'Staffing', icon: Users },
-  { id: 'efficiency', label: 'Efficiency', icon: TrendingUp },
-  { id: 'log', label: 'Run Log', icon: List },
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'pm', label: 'PM', icon: Wrench },
+  { id: 'checklists', label: 'Checklists', icon: ClipboardCheck },
+  { id: 'calibration', label: 'Calibration', icon: Thermometer },
+  { id: 'sanitation', label: 'Sanitation', icon: Droplets },
+  { id: 'loto', label: 'LOTO', icon: Lock },
+  { id: 'equipment', label: 'Equipment', icon: Shield },
+  { id: 'audit', label: 'Audit Log', icon: ScrollText },
 ];
 
 function App() {
-  const [activeTab, setActiveTab] = useState('schedule');
-  const data = useSheetData();
-
-  if (data.loading && !data.runs.length) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-powder-600 mx-auto mb-4" />
-          <p className="text-gray-500">Loading from Google Sheets…</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (data.error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center max-w-md">
-          <p className="text-red-600 font-medium mb-2">Failed to load data</p>
-          <p className="text-gray-500 text-sm mb-4">{data.error}</p>
-          <button
-            onClick={data.refresh}
-            className="px-4 py-2 bg-powder-600 text-white rounded-lg hover:bg-powder-700"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const [activeTab, setActiveTab] = useState('dashboard');
 
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img src="/logo.svg" alt="Powder Ops" className="h-10 w-auto" />
+              <div className="h-9 w-9 bg-powder-600 rounded-lg flex items-center justify-center">
+                <Shield size={20} className="text-white" />
+              </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Powder Ops Dashboard</h1>
-                <p className="text-sm text-gray-500">Production Analytics · EOD Report Data</p>
+                <h1 className="text-lg font-bold text-gray-900">Powder Ops FSQA</h1>
+                <p className="text-xs text-gray-500">Compliance & Preventive Maintenance</p>
               </div>
             </div>
-            <nav className="flex gap-1 bg-gray-100 rounded-lg p-1">
+            <nav className="hidden md:flex gap-1 bg-gray-100 rounded-lg p-1">
               {TABS.map((tab) => (
                 <button
                   key={tab.id}
@@ -73,36 +49,40 @@ function App() {
                   }`}
                 >
                   <tab.icon size={15} />
-                  {tab.label}
+                  <span className="hidden lg:inline">{tab.label}</span>
                 </button>
               ))}
             </nav>
           </div>
+          {/* Mobile nav */}
+          <nav className="md:hidden flex gap-1 mt-2 overflow-x-auto pb-1">
+            {TABS.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-1 px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap transition-colors ${
+                  activeTab === tab.id
+                    ? 'bg-powder-600 text-white'
+                    : 'bg-gray-100 text-gray-600'
+                }`}
+              >
+                <tab.icon size={13} />
+                {tab.label}
+              </button>
+            ))}
+          </nav>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
-        <FilterBar
-          teams={data.teams}
-          products={data.products}
-          teamFilter={data.teamFilter}
-          setTeamFilter={data.setTeamFilter}
-          productFilter={data.productFilter}
-          setProductFilter={data.setProductFilter}
-          dateRange={data.dateRange}
-          setDateRange={data.setDateRange}
-          lastRefresh={data.lastRefresh}
-          onRefresh={data.refresh}
-          loading={data.loading}
-        />
-
-        <KPICards runs={data.runs} />
-
-        {activeTab === 'production' && <ProductionTab runs={data.runs} schedule={data.schedule} />}
-        {activeTab === 'efficiency' && <EfficiencyTab runs={data.runs} />}
-        {activeTab === 'staffing' && <StaffingTab runs={data.runs} />}
-        {activeTab === 'schedule' && <ScheduleTab runs={data.runs} schedule={data.schedule} snapshots={data.scheduleSnapshots} />}
-        {activeTab === 'log' && <RunLog runs={data.runs} />}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+        {activeTab === 'dashboard' && <ComplianceDashboard />}
+        {activeTab === 'pm' && <PMPanel />}
+        {activeTab === 'checklists' && <ChecklistPanel />}
+        {activeTab === 'calibration' && <CalibrationPanel />}
+        {activeTab === 'sanitation' && <SanitationPanel />}
+        {activeTab === 'loto' && <LOTOPanel />}
+        {activeTab === 'equipment' && <EquipmentPanel />}
+        {activeTab === 'audit' && <AuditLogPanel />}
       </main>
     </div>
   );

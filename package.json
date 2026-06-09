@@ -1,29 +1,29 @@
 {
-  "name": "production-dashboard",
+  "name": "preventative-maintenance",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "FSQA Compliance & Preventive Maintenance Platform — SQF/NSF audit-ready digital ledger for single-site food manufacturing",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "eslint ."
   },
   "dependencies": {
+    "better-sqlite3": "^12.10.0",
     "compression": "^1.8.1",
     "cors": "^2.8.6",
     "date-fns": "^4.4.0",
     "express": "^5.2.1",
     "lucide-react": "^1.17.0",
-    "node-cron": "^4.2.1",
-    "papaparse": "^5.5.3",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "recharts": "^3.8.1"
+    "recharts": "^3.8.1",
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
