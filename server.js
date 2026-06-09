@@ -99,7 +99,15 @@ async function saveSnapshotsToGitHub() {
 // --- Schedule snapshot logic ---
 
 function getScheduleFingerprint(entries) {
-  return entries.map((e) => e.mo).filter(Boolean).sort().join(',');
+  return entries
+    .map((e) => `${e.date}|${e.room}|${e.mo}|${e.raw}`)
+    .sort()
+    .join('\n');
+}
+
+function getScheduleDateRange(entries) {
+  const dates = entries.map((e) => e.date).filter(Boolean).sort();
+  return { start: dates[0] || null, end: dates[dates.length - 1] || null };
 }
 
 function getWeekLabel(entries) {
@@ -110,7 +118,7 @@ function getWeekLabel(entries) {
   return `${d1.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${d2.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
 }
 
-async function snapshotScheduleIfNew(entries) {
+async function snapshotSchedule(entries) {
   if (!entries.length) return;
   const fingerprint = getScheduleFingerprint(entries);
   if (scheduleSnapshots.find((s) => s.fingerprint === fingerprint)) return;
@@ -123,11 +131,24 @@ async function snapshotScheduleIfNew(entries) {
     weekStart: dates[0] || null,
     weekEnd: dates[dates.length - 1] || null,
     capturedAt: new Date().toISOString(),
+    entryCount: entries.length,
     entries,
   });
   scheduleSnapshots.sort((a, b) => (b.weekStart || '').localeCompare(a.weekStart || ''));
   console.log(`[snapshots] New schedule snapshot: ${getWeekLabel(entries)}`);
   await saveSnapshotsToGitHub();
+}
+
+async function handleScheduleChange(newEntries) {
+  const oldEntries = cache.schedule.data || [];
+  const oldRange = getScheduleDateRange(oldEntries);
+  const newRange = getScheduleDateRange(newEntries);
+
+  if (oldEntries.length && oldRange.start && newRange.start !== oldRange.start) {
+    await snapshotSchedule(oldEntries);
+  }
+
+  await snapshotSchedule(newEntries);
 }
 
 // --- CSV parsing ---
@@ -220,9 +241,9 @@ async function syncSchedule() {
     console.log('[sync] Fetching schedule data...');
     const text = await fetchCSV(SCHEDULE_SHEET_URL);
     const data = parseSchedule(text);
+    await handleScheduleChange(data);
     cache.schedule = { data, lastSync: new Date().toISOString(), error: null };
     console.log(`[sync] Schedule: ${data.length} entries cached`);
-    await snapshotScheduleIfNew(data);
   } catch (err) {
     console.error('[sync] Schedule failed:', err.message);
     cache.schedule.error = err.message;
@@ -233,9 +254,15 @@ async function syncAll() {
   await Promise.all([syncEOD(), syncSchedule()]);
 }
 
-// Daily sync at 6:00 AM Central
-cron.schedule('0 6 * * *', () => {
-  console.log('[cron] Daily sync triggered');
+// Sync every 2 hours Mon–Fri 6AM–6PM Central to catch schedule changes before they're overwritten
+cron.schedule('0 6,8,10,12,14,16,18 * * 1-5', () => {
+  console.log('[cron] Scheduled sync triggered');
+  syncAll();
+}, { timezone: 'America/Chicago' });
+
+// Weekend sync once daily at 6AM
+cron.schedule('0 6 * * 0,6', () => {
+  console.log('[cron] Weekend sync triggered');
   syncAll();
 }, { timezone: 'America/Chicago' });
 
