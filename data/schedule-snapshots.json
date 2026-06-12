@@ -860,5 +860,184 @@
         "raw": "Taking down and moving equipment"
       }
     ]
+  },
+  {
+    "id": "mqbaz620",
+    "fingerprint": "2026-06-01|1|null|Bernardo Encisco Batching crew cleaning mixers and sifters Schedule this and currently No batching this week\n2026-06-01|Room|null|Monday 6/1\n2026-06-01|Room|null|Monday 6/1\n2026-06-02|Room|null|Tuesday 6/2\n2026-06-02|Room|null|Tuesday 6/2\n2026-06-03|Room|null|Wednesday 6/3\n2026-06-03|Room|null|Wednesday 6/3\n2026-06-04|Room|null|Thursday 6/4\n2026-06-04|Room|null|Thursday 6/4\n2026-06-05|Room|null|Friday 6/5\n2026-06-05|Room|null|Friday 6/5\n2026-06-08|Room|null|Monday 6/8\n2026-06-08|Room|null|Monday 6/8\n2026-06-09|Room|null|Tuesday 6/9\n2026-06-09|Room|null|Tuesday 6/9\n2026-06-10|Room|null|Wednesday 6/10\n2026-06-10|Room|null|Wednesday 6/10\n2026-06-11|Room|null|Thursday 6/11\n2026-06-11|Room|null|Thursday 6/11\n2026-06-12|Room|null|Friday 6/12\n2026-06-12|Room|null|Friday 6/12",
+    "weekLabel": "Jun 1 – Jun 12, 2026",
+    "weekStart": "2026-06-01",
+    "weekEnd": "2026-06-12",
+    "capturedAt": "2026-06-12T19:11:55.757Z",
+    "entryCount": 21,
+    "entries": [
+      {
+        "room": "Room",
+        "dayLabel": "Monday 6/1",
+        "date": "2026-06-01",
+        "mo": null,
+        "product": "Monday 6/1",
+        "raw": "Monday 6/1"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 6/2",
+        "date": "2026-06-02",
+        "mo": null,
+        "product": "Tuesday 6/2",
+        "raw": "Tuesday 6/2"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 6/3",
+        "date": "2026-06-03",
+        "mo": null,
+        "product": "Wednesday 6/3",
+        "raw": "Wednesday 6/3"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 6/4",
+        "date": "2026-06-04",
+        "mo": null,
+        "product": "Thursday 6/4",
+        "raw": "Thursday 6/4"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 6/5",
+        "date": "2026-06-05",
+        "mo": null,
+        "product": "Friday 6/5",
+        "raw": "Friday 6/5"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 6/1",
+        "date": "2026-06-01",
+        "mo": null,
+        "product": "Monday 6/1",
+        "raw": "Monday 6/1"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 6/2",
+        "date": "2026-06-02",
+        "mo": null,
+        "product": "Tuesday 6/2",
+        "raw": "Tuesday 6/2"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 6/3",
+        "date": "2026-06-03",
+        "mo": null,
+        "product": "Wednesday 6/3",
+        "raw": "Wednesday 6/3"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 6/4",
+        "date": "2026-06-04",
+        "mo": null,
+        "product": "Thursday 6/4",
+        "raw": "Thursday 6/4"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 6/5",
+        "date": "2026-06-05",
+        "mo": null,
+        "product": "Friday 6/5",
+        "raw": "Friday 6/5"
+      },
+      {
+        "room": "1",
+        "dayLabel": "Monday 6/1",
+        "date": "2026-06-01",
+        "mo": null,
+        "product": "Bernardo Encisco Batching crew cleaning mixers and sifters Schedule this and currently No batching this week",
+        "raw": "Bernardo Encisco Batching crew cleaning mixers and sifters Schedule this and currently No batching this week"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 6/8",
+        "date": "2026-06-08",
+        "mo": null,
+        "product": "Monday 6/8",
+        "raw": "Monday 6/8"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 6/9",
+        "date": "2026-06-09",
+        "mo": null,
+        "product": "Tuesday 6/9",
+        "raw": "Tuesday 6/9"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 6/10",
+        "date": "2026-06-10",
+        "mo": null,
+        "product": "Wednesday 6/10",
+        "raw": "Wednesday 6/10"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 6/11",
+        "date": "2026-06-11",
+        "mo": null,
+        "product": "Thursday 6/11",
+        "raw": "Thursday 6/11"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 6/12",
+        "date": "2026-06-12",
+        "mo": null,
+        "product": "Friday 6/12",
+        "raw": "Friday 6/12"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 6/8",
+        "date": "2026-06-08",
+        "mo": null,
+        "product": "Monday 6/8",
+        "raw": "Monday 6/8"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 6/9",
+        "date": "2026-06-09",
+        "mo": null,
+        "product": "Tuesday 6/9",
+        "raw": "Tuesday 6/9"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 6/10",
+        "date": "2026-06-10",
+        "mo": null,
+        "product": "Wednesday 6/10",
+        "raw": "Wednesday 6/10"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 6/11",
+        "date": "2026-06-11",
+        "mo": null,
+        "product": "Thursday 6/11",
+        "raw": "Thursday 6/11"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 6/12",
+        "date": "2026-06-12",
+        "mo": null,
+        "product": "Friday 6/12",
+        "raw": "Friday 6/12"
+      }
+    ]
   }
 ]
