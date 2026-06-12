@@ -1,5 +1,216 @@
 [
   {
+    "id": "mqbeu5ne",
+    "fingerprint": "2026-06-15|1.2|null|Hand Fill is ON CALL until further notice\n2026-06-15|15|null|Kitting Team is ON CALL until further notice\n2026-06-15|1|null|Bernardo Encisco Batching crew cleaning The rafters, mixers and sifters.  No batching this week\n2026-06-15|5|null|Stick Team is ON CALL until further notice\n2026-06-15|Room|null|Monday 6/15\n2026-06-15|Room|null|Monday 6/15\n2026-06-16|1|null|Batching is ON CALL until further notice\n2026-06-16|Room|null|Tuesday 6/16\n2026-06-16|Room|null|Tuesday 6/16\n2026-06-17|Room|null|Wednesday 6/17\n2026-06-17|Room|null|Wednesday 6/17\n2026-06-18|Room|null|Thursday 6/18\n2026-06-18|Room|null|Thursday 6/18\n2026-06-19|Room|null|Friday 6/19\n2026-06-19|Room|null|Friday 6/19\n2026-06-22|Room|null|Monday 6/22\n2026-06-22|Room|null|Monday 6/22\n2026-06-23|Room|null|Tuesday 6/23\n2026-06-23|Room|null|Tuesday 6/23\n2026-06-24|Room|null|Wednesday 6/24\n2026-06-24|Room|null|Wednesday 6/24\n2026-06-25|Room|null|Thursday 6/25\n2026-06-25|Room|null|Thursday 6/25\n2026-06-26|Room|null|Friday 6/26\n2026-06-26|Room|null|Friday 6/26",
+    "weekLabel": "Jun 15 – Jun 26, 2026",
+    "weekStart": "2026-06-15",
+    "weekEnd": "2026-06-26",
+    "capturedAt": "2026-06-12T21:00:00.410Z",
+    "entryCount": 25,
+    "entries": [
+      {
+        "room": "1.2",
+        "dayLabel": "Monday 6/15",
+        "date": "2026-06-15",
+        "mo": null,
+        "product": "Hand Fill is ON CALL until further notice",
+        "raw": "Hand Fill is ON CALL until further notice"
+      },
+      {
+        "room": "5",
+        "dayLabel": "Monday 6/15",
+        "date": "2026-06-15",
+        "mo": null,
+        "product": "Stick Team is ON CALL until further notice",
+        "raw": "Stick Team is ON CALL until further notice"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 6/15",
+        "date": "2026-06-15",
+        "mo": null,
+        "product": "Monday 6/15",
+        "raw": "Monday 6/15"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 6/16",
+        "date": "2026-06-16",
+        "mo": null,
+        "product": "Tuesday 6/16",
+        "raw": "Tuesday 6/16"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 6/17",
+        "date": "2026-06-17",
+        "mo": null,
+        "product": "Wednesday 6/17",
+        "raw": "Wednesday 6/17"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 6/18",
+        "date": "2026-06-18",
+        "mo": null,
+        "product": "Thursday 6/18",
+        "raw": "Thursday 6/18"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 6/19",
+        "date": "2026-06-19",
+        "mo": null,
+        "product": "Friday 6/19",
+        "raw": "Friday 6/19"
+      },
+      {
+        "room": "15",
+        "dayLabel": "Monday 6/15",
+        "date": "2026-06-15",
+        "mo": null,
+        "product": "Kitting Team is ON CALL until further notice",
+        "raw": "Kitting Team is ON CALL until further notice"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 6/15",
+        "date": "2026-06-15",
+        "mo": null,
+        "product": "Monday 6/15",
+        "raw": "Monday 6/15"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 6/16",
+        "date": "2026-06-16",
+        "mo": null,
+        "product": "Tuesday 6/16",
+        "raw": "Tuesday 6/16"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 6/17",
+        "date": "2026-06-17",
+        "mo": null,
+        "product": "Wednesday 6/17",
+        "raw": "Wednesday 6/17"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 6/18",
+        "date": "2026-06-18",
+        "mo": null,
+        "product": "Thursday 6/18",
+        "raw": "Thursday 6/18"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 6/19",
+        "date": "2026-06-19",
+        "mo": null,
+        "product": "Friday 6/19",
+        "raw": "Friday 6/19"
+      },
+      {
+        "room": "1",
+        "dayLabel": "Monday 6/15",
+        "date": "2026-06-15",
+        "mo": null,
+        "product": "Bernardo Encisco Batching crew cleaning The rafters, mixers and sifters.  No batching this week",
+        "raw": "Bernardo Encisco Batching crew cleaning The rafters, mixers and sifters.  No batching this week"
+      },
+      {
+        "room": "1",
+        "dayLabel": "Tuesday 6/16",
+        "date": "2026-06-16",
+        "mo": null,
+        "product": "Batching is ON CALL until further notice",
+        "raw": "Batching is ON CALL until further notice"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 6/22",
+        "date": "2026-06-22",
+        "mo": null,
+        "product": "Monday 6/22",
+        "raw": "Monday 6/22"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 6/23",
+        "date": "2026-06-23",
+        "mo": null,
+        "product": "Tuesday 6/23",
+        "raw": "Tuesday 6/23"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 6/24",
+        "date": "2026-06-24",
+        "mo": null,
+        "product": "Wednesday 6/24",
+        "raw": "Wednesday 6/24"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 6/25",
+        "date": "2026-06-25",
+        "mo": null,
+        "product": "Thursday 6/25",
+        "raw": "Thursday 6/25"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 6/26",
+        "date": "2026-06-26",
+        "mo": null,
+        "product": "Friday 6/26",
+        "raw": "Friday 6/26"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 6/22",
+        "date": "2026-06-22",
+        "mo": null,
+        "product": "Monday 6/22",
+        "raw": "Monday 6/22"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 6/23",
+        "date": "2026-06-23",
+        "mo": null,
+        "product": "Tuesday 6/23",
+        "raw": "Tuesday 6/23"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 6/24",
+        "date": "2026-06-24",
+        "mo": null,
+        "product": "Wednesday 6/24",
+        "raw": "Wednesday 6/24"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 6/25",
+        "date": "2026-06-25",
+        "mo": null,
+        "product": "Thursday 6/25",
+        "raw": "Thursday 6/25"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 6/26",
+        "date": "2026-06-26",
+        "mo": null,
+        "product": "Friday 6/26",
+        "raw": "Friday 6/26"
+      }
+    ]
+  },
+  {
     "id": "mq6vhmb9",
     "fingerprint": "2026-06-01|15|MO76716|MO76716 202832 TP Hydration Stick Pack, Lemonade\n2026-06-01|1|null|Bernardo Encisco Batching crew cleaning mixers and sifters Schedule this and currently No batching this week\n2026-06-01|5|MO76716|MO76716\n202832 TP Hydration Stick Pack, Lemonade Non-Allergen\n2026-06-01|6|MO76716|MO76716\n202832 TP Hydration Stick Pack, Lemonade \n Non-Allergen\n2026-06-01|7|MO76716|MO76716\n202832 TP Hydration Stick Pack, Lemonade \n Non-Allergen\n2026-06-01|Room|null|Monday 6/1\n2026-06-01|Room|null|Monday 6/1\n2026-06-02|15|MO76716|MO76716 202832 TP Hydration Stick Pack, Lemonade\n2026-06-02|5|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-02|6|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-02|7|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-02|Room|null|Tuesday 6/2\n2026-06-02|Room|null|Tuesday 6/2\n2026-06-03|15|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n2026-06-03|5|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-03|6|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-03|7|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-03|Room|null|Wednesday 6/3\n2026-06-03|Room|null|Wednesday 6/3\n2026-06-04|15|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n2026-06-04|5|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-04|6|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-04|7|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-04|Room|null|Thursday 6/4\n2026-06-04|Room|null|Thursday 6/4\n2026-06-05|Room|null|Friday 6/5\n2026-06-05|Room|null|Friday 6/5\n2026-06-08|15|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n2026-06-08|15|MO76719|MO76719  TP Hydration Stick Pack, Cotton Candy\n2026-06-08|15|null|11am pack 6 pouches of pancake into 96 boxes (12 x 9 x 4)\n2026-06-08|5|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-08|6|MO76719|MO76719  TP Hydration Stick Pack, Cotton Candy\n Non-Allergen\n2026-06-08|7|MO76719|MO76719  TP Hydration Stick Pack, Cotton Candy\n Non-Allergen\n2026-06-08|Room|null|Monday 6/8\n2026-06-08|Room|null|Monday 6/8\n2026-06-09|15|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n2026-06-09|1|null|Taking down and moving equipment\n2026-06-09|2|null|Taking down and moving equipment\n2026-06-09|3|null|Taking down and moving equipment\n2026-06-09|4|null|Taking down and moving equipment\n2026-06-09|5|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-09|6|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-09|7|MO76718|MO76718 TP Hydration Stick Pack, Strawberry Lemonade\n Non-Allergen\n2026-06-09|Room|null|Tuesday 6/9\n2026-06-09|Room|null|Tuesday 6/9\n2026-06-10|5|null|Taking down and moving equipment\n2026-06-10|Room|null|Wednesday 6/10\n2026-06-10|Room|null|Wednesday 6/10\n2026-06-11|Room|null|Thursday 6/11\n2026-06-11|Room|null|Thursday 6/11\n2026-06-12|Room|null|Friday 6/12\n2026-06-12|Room|null|Friday 6/12",
     "weekLabel": "Jun 1 – Jun 12, 2026",
