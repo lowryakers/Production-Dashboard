@@ -1,5 +1,440 @@
 [
   {
+    "id": "mr9toxvg",
+    "fingerprint": "2026-07-06|1.2|null|Hand Fill is ON CALL until further notice\n2026-07-06|15|null|Kitting Team is ON CALL until further notice\n2026-07-06|1|MO76721|MO76721\n Daily Fuel Vanilla\n2026-07-06|4|null|josefa@powder-ops.com Setup the sachet maching to run Thread Vanilla\n2026-07-06|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-06|Room|null|Monday 6/15\n2026-07-06|Room|null|Monday 6/15\n2026-07-07|1.2|null|Hand Fill is ON CALL until further notice\n2026-07-07|15|MO76721|Kitting   MO76721\n Daily fuel vanilla 6:30am\n2026-07-07|1|MO76721|MO76721\n Daily Fuel Vanilla\n2026-07-07|4|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-07|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-07|Room|null|Tuesday 6/16\n2026-07-07|Room|null|Tuesday 6/16\n2026-07-08|1.2|null|Hand Fill is ON CALL until further notice\n2026-07-08|15|MO76721|Kitting   MO76721\n Daily fuel vanilla 6:30am\n2026-07-08|1|MO76723|MO76723 FG0907 Original Protein Crepe Mix    MO76721\n Daily Fuel Vanilla\n2026-07-08|4|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-08|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-08|Room|null|Wednesday 6/17\n2026-07-08|Room|null|Wednesday 6/17\n2026-07-09|1.2|MO76723|MO76723 FG0907 Original Protein Crepe Mix\n2026-07-09|15|MO76721|Kitting   MO76721\n Daily fuel vanilla 6:30am\n2026-07-09|1|MO76721|MO76721\n Daily Fuel Vanilla\n2026-07-09|4|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-09|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-09|Room|null|Thursday 6/18\n2026-07-09|Room|null|Thursday 6/18\n2026-07-10|1.2|null|Hand Fill is ON CALL until further notice\n2026-07-10|3|null|off\n2026-07-10|Room|null|Friday 6/19\n2026-07-10|Room|null|Friday 6/19\n2026-07-13|15|MO76721|Kitting   MO76721\n Daily fuel vanilla 6:30am\n2026-07-13|4|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-13|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-13|Room|null|Monday 6/22\n2026-07-13|Room|null|Monday 6/22\n2026-07-14|15|MO76721|Kitting   MO76721\n Daily fuel vanilla 6:30am\n2026-07-14|4|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-14|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-14|Room|null|Tuesday 6/23\n2026-07-14|Room|null|Tuesday 6/23\n2026-07-15|15|MO76721|Kitting   MO76721\n Daily fuel vanilla 6:30am\n2026-07-15|4|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-15|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-15|Room|null|Wednesday 6/24\n2026-07-15|Room|null|Wednesday 6/24\n2026-07-16|4|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-16|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-16|Room|null|Thursday 6/25\n2026-07-16|Room|null|Thursday 6/25\n2026-07-17|Room|null|Friday 6/26\n2026-07-17|Room|null|Friday 6/26",
+    "weekLabel": "Jul 6 – Jul 17, 2026",
+    "weekStart": "2026-07-06",
+    "weekEnd": "2026-07-17",
+    "capturedAt": "2026-07-06T23:00:01.285Z",
+    "entryCount": 53,
+    "entries": [
+      {
+        "room": "1.2",
+        "dayLabel": "Monday 7/6",
+        "date": "2026-07-06",
+        "mo": null,
+        "product": "Hand Fill is ON CALL until further notice",
+        "raw": "Hand Fill is ON CALL until further notice"
+      },
+      {
+        "room": "1.2",
+        "dayLabel": "Tuesday 7/7",
+        "date": "2026-07-07",
+        "mo": null,
+        "product": "Hand Fill is ON CALL until further notice",
+        "raw": "Hand Fill is ON CALL until further notice"
+      },
+      {
+        "room": "1.2",
+        "dayLabel": "Wednesday 7/8",
+        "date": "2026-07-08",
+        "mo": null,
+        "product": "Hand Fill is ON CALL until further notice",
+        "raw": "Hand Fill is ON CALL until further notice"
+      },
+      {
+        "room": "1.2",
+        "dayLabel": "Thursday 7/9",
+        "date": "2026-07-09",
+        "mo": "MO76723",
+        "product": "FG0907 Original Protein Crepe Mix",
+        "raw": "MO76723 FG0907 Original Protein Crepe Mix"
+      },
+      {
+        "room": "1.2",
+        "dayLabel": "Friday 7/10",
+        "date": "2026-07-10",
+        "mo": null,
+        "product": "Hand Fill is ON CALL until further notice",
+        "raw": "Hand Fill is ON CALL until further notice"
+      },
+      {
+        "room": "3",
+        "dayLabel": "Friday 7/10",
+        "date": "2026-07-10",
+        "mo": null,
+        "product": "off",
+        "raw": "off"
+      },
+      {
+        "room": "4",
+        "dayLabel": "Monday 7/6",
+        "date": "2026-07-06",
+        "mo": null,
+        "product": "josefa@powder-ops.com Setup the sachet maching to run Thread Vanilla",
+        "raw": "josefa@powder-ops.com Setup the sachet maching to run Thread Vanilla"
+      },
+      {
+        "room": "4",
+        "dayLabel": "Tuesday 7/7",
+        "date": "2026-07-07",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "4",
+        "dayLabel": "Wednesday 7/8",
+        "date": "2026-07-08",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "4",
+        "dayLabel": "Thursday 7/9",
+        "date": "2026-07-09",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "5",
+        "dayLabel": "Monday 7/6",
+        "date": "2026-07-06",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "5",
+        "dayLabel": "Tuesday 7/7",
+        "date": "2026-07-07",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "5",
+        "dayLabel": "Wednesday 7/8",
+        "date": "2026-07-08",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "5",
+        "dayLabel": "Thursday 7/9",
+        "date": "2026-07-09",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 7/6",
+        "date": "2026-07-06",
+        "mo": null,
+        "product": "Monday 6/15",
+        "raw": "Monday 6/15"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 7/7",
+        "date": "2026-07-07",
+        "mo": null,
+        "product": "Tuesday 6/16",
+        "raw": "Tuesday 6/16"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 7/8",
+        "date": "2026-07-08",
+        "mo": null,
+        "product": "Wednesday 6/17",
+        "raw": "Wednesday 6/17"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 7/9",
+        "date": "2026-07-09",
+        "mo": null,
+        "product": "Thursday 6/18",
+        "raw": "Thursday 6/18"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 7/10",
+        "date": "2026-07-10",
+        "mo": null,
+        "product": "Friday 6/19",
+        "raw": "Friday 6/19"
+      },
+      {
+        "room": "15",
+        "dayLabel": "Monday 7/6",
+        "date": "2026-07-06",
+        "mo": null,
+        "product": "Kitting Team is ON CALL until further notice",
+        "raw": "Kitting Team is ON CALL until further notice"
+      },
+      {
+        "room": "15",
+        "dayLabel": "Tuesday 7/7",
+        "date": "2026-07-07",
+        "mo": "MO76721",
+        "product": "Kitting   Daily fuel vanilla 6:30am",
+        "raw": "Kitting   MO76721\n Daily fuel vanilla 6:30am"
+      },
+      {
+        "room": "15",
+        "dayLabel": "Wednesday 7/8",
+        "date": "2026-07-08",
+        "mo": "MO76721",
+        "product": "Kitting   Daily fuel vanilla 6:30am",
+        "raw": "Kitting   MO76721\n Daily fuel vanilla 6:30am"
+      },
+      {
+        "room": "15",
+        "dayLabel": "Thursday 7/9",
+        "date": "2026-07-09",
+        "mo": "MO76721",
+        "product": "Kitting   Daily fuel vanilla 6:30am",
+        "raw": "Kitting   MO76721\n Daily fuel vanilla 6:30am"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 7/6",
+        "date": "2026-07-06",
+        "mo": null,
+        "product": "Monday 6/15",
+        "raw": "Monday 6/15"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 7/7",
+        "date": "2026-07-07",
+        "mo": null,
+        "product": "Tuesday 6/16",
+        "raw": "Tuesday 6/16"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 7/8",
+        "date": "2026-07-08",
+        "mo": null,
+        "product": "Wednesday 6/17",
+        "raw": "Wednesday 6/17"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 7/9",
+        "date": "2026-07-09",
+        "mo": null,
+        "product": "Thursday 6/18",
+        "raw": "Thursday 6/18"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 7/10",
+        "date": "2026-07-10",
+        "mo": null,
+        "product": "Friday 6/19",
+        "raw": "Friday 6/19"
+      },
+      {
+        "room": "1",
+        "dayLabel": "Monday 7/6",
+        "date": "2026-07-06",
+        "mo": "MO76721",
+        "product": "Daily Fuel Vanilla",
+        "raw": "MO76721\n Daily Fuel Vanilla"
+      },
+      {
+        "room": "1",
+        "dayLabel": "Tuesday 7/7",
+        "date": "2026-07-07",
+        "mo": "MO76721",
+        "product": "Daily Fuel Vanilla",
+        "raw": "MO76721\n Daily Fuel Vanilla"
+      },
+      {
+        "room": "1",
+        "dayLabel": "Wednesday 7/8",
+        "date": "2026-07-08",
+        "mo": "MO76723",
+        "product": "FG0907 Original Protein Crepe Mix    MO76721\n Daily Fuel Vanilla",
+        "raw": "MO76723 FG0907 Original Protein Crepe Mix    MO76721\n Daily Fuel Vanilla"
+      },
+      {
+        "room": "1",
+        "dayLabel": "Thursday 7/9",
+        "date": "2026-07-09",
+        "mo": "MO76721",
+        "product": "Daily Fuel Vanilla",
+        "raw": "MO76721\n Daily Fuel Vanilla"
+      },
+      {
+        "room": "4",
+        "dayLabel": "Monday 7/13",
+        "date": "2026-07-13",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "4",
+        "dayLabel": "Tuesday 7/14",
+        "date": "2026-07-14",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "4",
+        "dayLabel": "Wednesday 7/15",
+        "date": "2026-07-15",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "4",
+        "dayLabel": "Thursday 7/16",
+        "date": "2026-07-16",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "5",
+        "dayLabel": "Monday 7/13",
+        "date": "2026-07-13",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "5",
+        "dayLabel": "Tuesday 7/14",
+        "date": "2026-07-14",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "5",
+        "dayLabel": "Wednesday 7/15",
+        "date": "2026-07-15",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "5",
+        "dayLabel": "Thursday 7/16",
+        "date": "2026-07-16",
+        "mo": "MO76721",
+        "product": "Sachet machine Daily Fuel vanilla",
+        "raw": "MO76721\n Sachet machine Daily Fuel vanilla"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 7/13",
+        "date": "2026-07-13",
+        "mo": null,
+        "product": "Monday 6/22",
+        "raw": "Monday 6/22"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 7/14",
+        "date": "2026-07-14",
+        "mo": null,
+        "product": "Tuesday 6/23",
+        "raw": "Tuesday 6/23"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 7/15",
+        "date": "2026-07-15",
+        "mo": null,
+        "product": "Wednesday 6/24",
+        "raw": "Wednesday 6/24"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 7/16",
+        "date": "2026-07-16",
+        "mo": null,
+        "product": "Thursday 6/25",
+        "raw": "Thursday 6/25"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 7/17",
+        "date": "2026-07-17",
+        "mo": null,
+        "product": "Friday 6/26",
+        "raw": "Friday 6/26"
+      },
+      {
+        "room": "15",
+        "dayLabel": "Monday 7/13",
+        "date": "2026-07-13",
+        "mo": "MO76721",
+        "product": "Kitting   Daily fuel vanilla 6:30am",
+        "raw": "Kitting   MO76721\n Daily fuel vanilla 6:30am"
+      },
+      {
+        "room": "15",
+        "dayLabel": "Tuesday 7/14",
+        "date": "2026-07-14",
+        "mo": "MO76721",
+        "product": "Kitting   Daily fuel vanilla 6:30am",
+        "raw": "Kitting   MO76721\n Daily fuel vanilla 6:30am"
+      },
+      {
+        "room": "15",
+        "dayLabel": "Wednesday 7/15",
+        "date": "2026-07-15",
+        "mo": "MO76721",
+        "product": "Kitting   Daily fuel vanilla 6:30am",
+        "raw": "Kitting   MO76721\n Daily fuel vanilla 6:30am"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Monday 7/13",
+        "date": "2026-07-13",
+        "mo": null,
+        "product": "Monday 6/22",
+        "raw": "Monday 6/22"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Tuesday 7/14",
+        "date": "2026-07-14",
+        "mo": null,
+        "product": "Tuesday 6/23",
+        "raw": "Tuesday 6/23"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Wednesday 7/15",
+        "date": "2026-07-15",
+        "mo": null,
+        "product": "Wednesday 6/24",
+        "raw": "Wednesday 6/24"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Thursday 7/16",
+        "date": "2026-07-16",
+        "mo": null,
+        "product": "Thursday 6/25",
+        "raw": "Thursday 6/25"
+      },
+      {
+        "room": "Room",
+        "dayLabel": "Friday 7/17",
+        "date": "2026-07-17",
+        "mo": null,
+        "product": "Friday 6/26",
+        "raw": "Friday 6/26"
+      }
+    ]
+  },
+  {
     "id": "mqsoep7c",
     "fingerprint": "2026-06-22|3|null|josefa@powder-ops.com Setup the sachet maching to run Thread Vanilla\n2026-06-22|Room|null|Monday 6/22\n2026-06-22|Room|null|Monday 6/22\n2026-06-23|3|null|josefa@powder-ops.com Setup the sachet maching to run Thread Vanilla\n2026-06-23|Room|null|Tuesday 6/23\n2026-06-23|Room|null|Tuesday 6/23\n2026-06-24|Room|null|Wednesday 6/24\n2026-06-24|Room|null|Wednesday 6/24\n2026-06-25|1|MO76721|MO76721\n Daily Fuel Vanilla\n2026-06-25|Room|null|Thursday 6/25\n2026-06-25|Room|null|Thursday 6/25\n2026-06-26|Room|null|Friday 6/26\n2026-06-26|Room|null|Friday 6/26\n2026-06-29|1.2|null|Hand Fill is ON CALL until further notice\n2026-06-29|15|null|Kitting Team is ON CALL until further notice\n2026-06-29|1|null|Bernardo Encisco Batching crew cleaning The rafters, mixers and sifters.  No batching this week\n2026-06-29|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-06-29|Room|null|Monday 6/15\n2026-06-29|Room|null|Monday 6/15\n2026-06-30|1.2|null|Hand Fill is ON CALL until further notice\n2026-06-30|1|null|Batching is ON CALL until further notice\n2026-06-30|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-06-30|Room|null|Tuesday 6/16\n2026-06-30|Room|null|Tuesday 6/16\n2026-07-01|1.2|null|Hand Fill is ON CALL until further notice\n2026-07-01|3|null|josefa@powder-ops.com Setup the sachet maching to run Thread Vanilla\n2026-07-01|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-01|Room|null|Wednesday 6/17\n2026-07-01|Room|null|Wednesday 6/17\n2026-07-02|1.2|null|Hand Fill is ON CALL until further notice\n2026-07-02|3|null|josefa@powder-ops.com Setup the sachet maching to run Thread Vanilla\n2026-07-02|5|MO76721|MO76721\n Sachet machine Daily Fuel vanilla\n2026-07-02|Room|null|Thursday 6/18\n2026-07-02|Room|null|Thursday 6/18\n2026-07-03|1.2|null|Hand Fill is ON CALL until further notice\n2026-07-03|3|null|off\n2026-07-03|Room|null|Friday 6/19\n2026-07-03|Room|null|Friday 6/19",
     "weekLabel": "Jun 22 – Jul 3, 2026",
